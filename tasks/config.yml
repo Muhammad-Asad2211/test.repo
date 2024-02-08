@@ -1,0 +1,15 @@
+---
+- name: Add Firewall Rules
+  firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
+- name: Reload the Firewall Configuration
+  systemd:
+        name: firewalld
+        state: reloaded
+- name: Copy Index File to Apache dir
+  copy:        
+        src: /files/index.html # This is the file contains content for the index page
+        dest: /var/www/html  # As the default location of Apache's web root directory
+...
